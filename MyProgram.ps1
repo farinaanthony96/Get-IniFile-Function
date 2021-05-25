@@ -26,8 +26,11 @@ $sScriptVersion = "0.1"
 # Set Error Action to Silently Continue
 $ErrorActionPreference = "SilentlyContinue"
 
+$scriptPath = $MyInvocation.MyCommand.Path
+$scriptDir = Split-Path $scriptPath -Parent
+
 # Dot Source required Function Libraries
-. ".\Get-IniFile-Function.ps1"
+. "$scriptDir\Get-IniFile-Function.ps1"
 
 
 #---------------------------------------[Functions]---------------------------------------
@@ -36,7 +39,7 @@ $ErrorActionPreference = "SilentlyContinue"
 #---------------------------------------[Execution]---------------------------------------
 
 # Get config parameters from config.ini
-$configIni = Get-IniFile .\config.ini
+$configIni = Get-IniFile "$scriptDir\config.ini"
 
 # Output file path and names from [io] section of cognif.ini
 $LogFile = $configIni.Locations.LogFile
